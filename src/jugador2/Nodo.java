@@ -116,6 +116,7 @@ public class Nodo {
 			}
 		}
 		this.utilidad=max;
+		System.out.println("Utilidad :"+this.utilidad);
 
 	}
 	public void EligeMin() {
@@ -129,6 +130,7 @@ public class Nodo {
 			}
 		}
 		this.utilidad=min;
+		System.out.println("Utilidad :"+this.utilidad);
 	}
 	
 }

@@ -60,12 +60,16 @@ public class Alg_Minimax {
 		while(iterador.hasNext()){				
 			Completo_CalcularUtilidad(iterador.next());
 		}
-		if(actual.Jugador==Nodo.MAX){
-			actual.EligeMax();
+		if(!actual.esHoja()){
+			if(actual.Jugador==Nodo.MAX){
+				actual.EligeMax();
+			}
+			else{
+				actual.EligeMin();
+			}
+			
 		}
-		else{
-			actual.EligeMin();
-		}
+		
 	}
 
 	public static void Completo_CreaArbol(Nodo ini){
