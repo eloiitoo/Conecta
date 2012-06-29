@@ -108,27 +108,27 @@ public class Nodo {
 	public void EligeMax() {
 		// Elige el mejor de sus hijos
 		int max=Integer.MIN_VALUE;
-		Iterator<Nodo> iterador=hijos.iterator();
+		Iterator<Nodo> iterador=this.hijos.iterator();
 		while(iterador.hasNext()){
 			Nodo actual=iterador.next();
 			if(actual.utilidad>max){
 				max=actual.utilidad;
 			}
 		}
-		utilidad=max;
+		this.utilidad=max;
 
 	}
 	public void EligeMin() {
 		// Elige el peor de sus hijos
 		int min=Integer.MAX_VALUE;
-		Iterator<Nodo> iterador=hijos.iterator();
+		Iterator<Nodo> iterador=this.hijos.iterator();
 		while(iterador.hasNext()){
 			Nodo actual=iterador.next();
 			if(actual.utilidad<min){
 				min=actual.utilidad;
 			}
 		}
-		utilidad=min;
+		this.utilidad=min;
 	}
 	
 }
