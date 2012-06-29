@@ -42,7 +42,7 @@ public class Alg_Minimax {
 		
 		System.out.println("Utilidad de la raiz:"+ini.utilidad);
 		System.out.println("LA NO Utilidad de la raiz:"+ini.utilidad);
-		
+		ogogkg
 		
 		while(iterador.hasNext()){
 			Nodo actual=iterador.next();
