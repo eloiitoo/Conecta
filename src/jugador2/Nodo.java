@@ -100,10 +100,7 @@ public class Nodo {
 		
 		return true;
 	}
-	public void sethijos(ArrayList<Nodo> sucesores) {
-		this.hijos=sucesores;
-		
-	}
+
 
 	public void EligeMax() {
 		// Elige el mejor de sus hijos
@@ -116,9 +113,10 @@ public class Nodo {
 			}
 		}
 		this.utilidad=max;
-		System.out.println("Utilidad :"+this.utilidad);
+		System.out.println("Utilidad MAX:"+this.utilidad);
 
 	}
+	
 	public void EligeMin() {
 		// Elige el peor de sus hijos
 		int min=Integer.MAX_VALUE;
@@ -130,7 +128,7 @@ public class Nodo {
 			}
 		}
 		this.utilidad=min;
-		System.out.println("Utilidad :"+this.utilidad);
+		System.out.println("Utilidad MIN:"+this.utilidad);
 	}
 	
 }
