@@ -49,7 +49,7 @@ public class Nodo {
 		
 		Nodo n;
 		for(int i=1;i<=tablero.getNumColumnas();i++){
-			if(tablero.getLlenado(i)>3){
+			if(tablero.getLlenado(i)>2){
 				n=new Nodo(tablero);
 				n.padre=this;
 				n.Accioncolumna=i;
@@ -82,22 +82,6 @@ public class Nodo {
 				return false;
 			}
 		}
-		return true;
-	}
-	public boolean iguales(Nodo n) {
-		for(int i=1;i<=tablero.getNumColumnas();i++){
-			if(n.tablero.getLlenado(i)!=this.tablero.getLlenado(i)){
-				return false;
-			}
-		}
-		
-		for(int i=1;i<=this.tablero.getNumColumnas();i++){
-			for(int j=0;j<this.tablero.getNumFilas()-this.tablero.getLlenado(i);j++){
-				if(this.tablero.getTipoFicha(this.tablero.getNumFilas()-j,i) != n.tablero.getTipoFicha(n.tablero.getNumFilas()-j,i)) 
-					return false;
-			}
-		}
-		
 		return true;
 	}
 

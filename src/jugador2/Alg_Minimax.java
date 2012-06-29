@@ -34,7 +34,7 @@ public class Alg_Minimax {
 		
 		
 		//Si no puedo ganar --> Aleatorio
-		System.out.println("ALEATORIO");
+		System.out.println("ALEATORIO      ALEATORIO     ALEATORIO");
 		Random rand = new Random();
 		int accion=1;
 		do {
@@ -46,7 +46,14 @@ public class Alg_Minimax {
 		return accion;
 	}
 
-
+	public static void Completo_CreaArbol(Nodo ini){
+		ArrayList<Nodo> sucesores= ini.getSucesores();
+		Iterator<Nodo> it=sucesores.iterator();
+		while(it.hasNext()){
+			Completo_CreaArbol(it.next());
+		}
+	}
+	
 	public static void Completo_CalcularUtilidad(Nodo ini) {
 		// Explande la utilidad de los nodos hojas hasta la raiz
 
@@ -76,14 +83,7 @@ public class Alg_Minimax {
 		
 	}
 
-	public static void Completo_CreaArbol(Nodo ini){
-		ArrayList<Nodo> sucesores= ini.getSucesores();
-		Iterator<Nodo> it=sucesores.iterator();
-		while(it.hasNext()){
-			Nodo actual=it.next();
-			Completo_CreaArbol(actual);
-		}
-	}
+
 	
 
 }
