@@ -24,17 +24,26 @@ public class Alg_Minimax {
 		Iterator<Nodo> iterador=ini.hijos.iterator();
 		
 		//System.out.println("Utilidad de la raiz:"+ini.utilidad);
-		while(iterador.hasNext()){
+while(iterador.hasNext()){//INTENTO GANAR 
 			Nodo actual=iterador.next();
 
 			if(actual.utilidad==1){
 				return actual.Accioncolumna;
 			}
 		}
+		iterador=ini.hijos.iterator();
+		while(iterador.hasNext()){//SI NO UEDO GANAR INTENTO EMPATAR
+			Nodo actual=iterador.next();
+
+			if(actual.utilidad==0){
+				return actual.Accioncolumna;
+			}
+		}
 		
 		
-		//Si no puedo ganar --> Aleatorio
-		System.out.println("ALEATORIO      ALEATORIO     ALEATORIO");
+
+		//Si no puedo ganar ni empartar --> Aleatorio
+		//System.out.println("ALEATORIO      ALEATORIO     ALEATORIO");
 		Random rand = new Random();
 		int accion=1;
 		do {
@@ -46,7 +55,14 @@ public class Alg_Minimax {
 		return accion;
 	}
 
-
+	public static void Completo_CreaArbol(Nodo ini){
+		ArrayList<Nodo> sucesores= ini.getSucesores();
+		Iterator<Nodo> it=sucesores.iterator();
+		while(it.hasNext()){
+			Completo_CreaArbol(it.next());
+		}
+	}
+	
 	public static void Completo_CalcularUtilidad(Nodo ini) {
 		// Explande la utilidad de los nodos hojas hasta la raiz
 
@@ -76,14 +92,7 @@ public class Alg_Minimax {
 		
 	}
 
-	public static void Completo_CreaArbol(Nodo ini){
-		ArrayList<Nodo> sucesores= ini.getSucesores();
-		Iterator<Nodo> it=sucesores.iterator();
-		while(it.hasNext()){
-			Nodo actual=it.next();
-			Completo_CreaArbol(actual);
-		}
-	}
+
 	
 
 }

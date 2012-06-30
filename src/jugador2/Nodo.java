@@ -32,9 +32,6 @@ public class Nodo {
 				clon.colocarFicha(i, tablero.getTipoFicha(tablero.getNumFilas()-j,i));
 			}
 		}
-		
-		
-		
 		return clon;
 	}
 
@@ -73,7 +70,7 @@ public class Nodo {
 		return sucesores;
 	}
 	public boolean esHoja() {
-		if(this.hijos.isEmpty())return true;
+		if(this.hijos.isEmpty()) return true;
 		else return false;
 	}
 	public boolean tablerolleno() {
@@ -97,7 +94,7 @@ public class Nodo {
 			}
 		}
 		this.utilidad=max;
-		System.out.println("Utilidad MAX:"+this.utilidad);
+		//System.out.println("Utilidad MAX:"+this.utilidad);
 
 	}
 	
@@ -112,7 +109,7 @@ public class Nodo {
 			}
 		}
 		this.utilidad=min;
-		System.out.println("Utilidad MIN:"+this.utilidad);
+		//System.out.println("Utilidad MIN:"+this.utilidad);
 	}
 	
 }
