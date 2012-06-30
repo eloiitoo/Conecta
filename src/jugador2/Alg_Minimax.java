@@ -23,7 +23,7 @@ public class Alg_Minimax {
 		Completo_CalcularUtilidad(ini);
 		Iterator<Nodo> iterador=ini.hijos.iterator();
 		
-		System.out.println("Utilidad de la raiz:"+ini.utilidad);
+		//System.out.println("Utilidad de la raiz:"+ini.utilidad);
 		while(iterador.hasNext()){//INTENTO GANAR 
 			Nodo actual=iterador.next();
 
@@ -42,7 +42,7 @@ public class Alg_Minimax {
 		
 		
 		//Si no puedo ganar ni empartar --> Aleatorio
-		System.out.println("ALEATORIO      ALEATORIO     ALEATORIO");
+		//System.out.println("ALEATORIO      ALEATORIO     ALEATORIO");
 		Random rand = new Random();
 		int accion=1;
 		do {

@@ -94,7 +94,7 @@ public class Nodo {
 			}
 		}
 		this.utilidad=max;
-		System.out.println("Utilidad MAX:"+this.utilidad);
+		//System.out.println("Utilidad MAX:"+this.utilidad);
 
 	}
 	
@@ -109,7 +109,7 @@ public class Nodo {
 			}
 		}
 		this.utilidad=min;
-		System.out.println("Utilidad MIN:"+this.utilidad);
+		//System.out.println("Utilidad MIN:"+this.utilidad);
 	}
 	
 }
