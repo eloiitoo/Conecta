@@ -23,8 +23,8 @@ public class Alg_Minimax {
 		Completo_CalcularUtilidad(ini);
 		Iterator<Nodo> iterador=ini.hijos.iterator();
 		
-		//System.out.println("Utilidad de la raiz:"+ini.utilidad);
-while(iterador.hasNext()){//INTENTO GANAR 
+		System.out.println("Utilidad de la raiz:"+ini.utilidad);
+		while(iterador.hasNext()){//INTENTO GANAR 
 			Nodo actual=iterador.next();
 
 			if(actual.utilidad==1){
