@@ -24,7 +24,7 @@ public class Alg_Minimax {
 		Iterator<Nodo> iterador=ini.hijos.iterator();
 		
 		System.out.println("Utilidad de la raiz:"+ini.utilidad);
-		while(iterador.hasNext()){//INTENTO GANAR
+		while(iterador.hasNext()){//INTENTO GANAR 
 			Nodo actual=iterador.next();
 
 			if(actual.utilidad==1){
