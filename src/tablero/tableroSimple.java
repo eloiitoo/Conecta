@@ -20,7 +20,7 @@ public class tableroSimple implements Serializable {
    private int numFilas;
    private int numColumnas;
    private int numEspacios;
-   private int LONG_SOLUCION =3;//4;
+   private int LONG_SOLUCION =4;//PARA EL MINISERVIDOR PONER 3
 
    public tableroSimple(int _numFilas, int _numColumnas,int c) {
       tablero = new tipoFichas[_numFilas][_numColumnas];

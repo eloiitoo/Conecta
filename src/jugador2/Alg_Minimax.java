@@ -15,9 +15,11 @@ public class Alg_Minimax {
 	public static int ElegirColumna(tableroSimple tablero) {
 		// COLOCAR AQUI EL CODIGO!!
 		Nodo ini=new Nodo(tablero);
-		return Completo(ini);
+		//return Completo(ini);
+		return Heuristica(ini,5);
 	}
-	
+
+//////////////Generacion infinita del arbol. (con Mini-Servidor)//////////////Generacion infinita del arbol. (con Mini-Servidor)////////////
 	public static int Completo(Nodo ini){
 		Completo_CreaArbol(ini);
 		Completo_CalcularUtilidad(ini);
@@ -92,7 +94,63 @@ public class Alg_Minimax {
 		
 	}
 
+/////////////////Generacion limitada con heuristica./////////////////Generacion limitada con heuristica./////////////////
+	public static int Heuristica(Nodo ini,int limite){
+		Heuristica_CreaArbol(ini,limite);
+		Heutistica_CalcularUtilidad(ini);
+		Iterator<Nodo> iterador=ini.hijos.iterator();
+		//System.out.println("Utilidad de la raiz:"+ini.utilidad);
+		while(iterador.hasNext()){//INTENTO GANAR 
+			Nodo actual=iterador.next();
 
+			if(actual.utilidad==ini.utilidad){
+				return actual.Accioncolumna;
+			}
+		}
+		
+		//Si algo falla --> Aleatorio
+		System.out.println("ALEATORIO      ALEATORIO     ALEATORIO");
+		Random rand = new Random();
+		int accion=1;
+		do {
+            accion = 1 + rand.nextInt(ini.tablero.getNumColumnas());
+            
+         } while (ini.tablero.getLlenado(accion) == 0);
+		
+		
+		return accion;
+	}
+
+	private static void Heuristica_CreaArbol(Nodo ini,int limite) {
+		if(limite>0){
+			ArrayList<Nodo> sucesores= ini.getSucesores();
+			Iterator<Nodo> it=sucesores.iterator();
+			while(it.hasNext()){
+				Heuristica_CreaArbol(it.next(),limite-1);
+			}
+		}
+	}
+
+	private static void Heutistica_CalcularUtilidad(Nodo ini) {
+		// Explande la utilidad de los nodos hojas hasta la raiz
+
+		Iterator<Nodo> iterador=ini.hijos.iterator();
+		while(iterador.hasNext()){				
+			Heutistica_CalcularUtilidad(iterador.next());
+		}
+		
+		if(ini.esHoja()){
+			ini.calcula_utilidad();
+		}
+		else{
+			if(ini.Jugador==Nodo.MAX){
+				ini.EligeMax();
+			}
+			else{
+				ini.EligeMin();
+			}
+		}
+	}
 	
-
+	
 }
