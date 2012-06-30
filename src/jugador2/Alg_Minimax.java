@@ -24,16 +24,24 @@ public class Alg_Minimax {
 		Iterator<Nodo> iterador=ini.hijos.iterator();
 		
 		System.out.println("Utilidad de la raiz:"+ini.utilidad);
-		while(iterador.hasNext()){
+		while(iterador.hasNext()){//INTENTO GANAR
 			Nodo actual=iterador.next();
 
 			if(actual.utilidad==1){
 				return actual.Accioncolumna;
 			}
 		}
+		iterador=ini.hijos.iterator();
+		while(iterador.hasNext()){//SI NO UEDO GANAR INTENTO EMPATAR
+			Nodo actual=iterador.next();
+
+			if(actual.utilidad==0){
+				return actual.Accioncolumna;
+			}
+		}
 		
 		
-		//Si no puedo ganar --> Aleatorio
+		//Si no puedo ganar ni empartar --> Aleatorio
 		System.out.println("ALEATORIO      ALEATORIO     ALEATORIO");
 		Random rand = new Random();
 		int accion=1;

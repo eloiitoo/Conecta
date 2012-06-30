@@ -32,9 +32,6 @@ public class Nodo {
 				clon.colocarFicha(i, tablero.getTipoFicha(tablero.getNumFilas()-j,i));
 			}
 		}
-		
-		
-		
 		return clon;
 	}
 
@@ -49,7 +46,7 @@ public class Nodo {
 		
 		Nodo n;
 		for(int i=1;i<=tablero.getNumColumnas();i++){
-			if(tablero.getLlenado(i)>2){
+			if(tablero.getLlenado(i)>3){
 				n=new Nodo(tablero);
 				n.padre=this;
 				n.Accioncolumna=i;
@@ -73,7 +70,7 @@ public class Nodo {
 		return sucesores;
 	}
 	public boolean esHoja() {
-		if(this.hijos.isEmpty())return true;
+		if(this.hijos.isEmpty()) return true;
 		else return false;
 	}
 	public boolean tablerolleno() {
