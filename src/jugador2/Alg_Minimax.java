@@ -15,11 +15,14 @@ public class Alg_Minimax {
 	public static int ElegirColumna(tableroSimple tablero) {
 		// COLOCAR AQUI EL CODIGO!!
 		Nodo ini=new Nodo(tablero);
+		Nodo ini2=new Nodo(tablero);
 		//return Completo(ini);
 		//return Heuristica(ini,5);
-		if(Heuristica(ini,5)==Poda(ini,5)) System.out.println("FUNCIONA");
+		int heuristica=Heuristica(ini2,5);
+		int poda=Poda(ini,5);
+		if(heuristica==poda) System.out.println("FUNCIONA");
 		else System.out.println("NO FUNCIONA");
-		return Poda(ini,5);
+		return poda;
 	}
 
 
@@ -159,7 +162,6 @@ public class Alg_Minimax {
 	///////PODA/////////PODA/////////PODA/////////PODA/////////PODA/////////PODA/////////PODA////
 	public static int Poda(Nodo ini, int limite){
 		Poda_CreaArbol(ini,limite);
-		//Poda_CalcularUtilidad(ini);
 		Iterator<Nodo> iterador=ini.hijos.iterator();
 		//System.out.println("Utilidad de la raiz:"+ini.utilidad);
 		while(iterador.hasNext()){
