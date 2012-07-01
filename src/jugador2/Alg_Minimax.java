@@ -22,8 +22,8 @@ public class Alg_Minimax {
 		
 		Nodo ini=new Nodo(tablero);
 		//columna=Completo(ini);
-		//columna=Heuristica(ini,5);
-		columna=Poda(ini,5);
+		columna=Heuristica(ini,5);
+		//columna=Poda(ini,5);
 
 		
 		//Medimos el tiempo de ejecución
@@ -196,8 +196,12 @@ public class Alg_Minimax {
 	
 	
 	private static void Poda_CreaArbol(Nodo ini, int limite) {
+		if(limite==0){
+			ini.calcula_utilidad();
+		}
+		else{
 			ArrayList<Nodo> sucesores= ini.getSucesores();
-			if(ini.esHoja()||limite==0){
+			if(ini.esHoja()){
 				ini.calcula_utilidad();
 			}
 			else{
@@ -216,26 +220,11 @@ public class Alg_Minimax {
 				}
 				//if(ini.alfa<ini.beta) System.out.println("HE PODADO");
 			}
+		}
+			
 	}
 
-//	private static void Poda_CalcularUtilidad(Nodo ini) {
-//		Iterator<Nodo> iterador=ini.hijos.iterator();
-//		while(iterador.hasNext()){				
-//			Heutistica_CalcularUtilidad(iterador.next());
-//		}
-//		
-//		if(ini.esHoja()){
-//			ini.calcula_utilidad();
-//		}
-//		else{
-//			if(ini.Jugador==Nodo.MAX){
-//				ini.EligeMax();
-//			}
-//			else{
-//				ini.EligeMin();
-//			}
-//		}
-//	}
+
 
 	
 }
