@@ -14,15 +14,24 @@ public class Alg_Minimax {
 	
 	public static int ElegirColumna(tableroSimple tablero) {
 		// COLOCAR AQUI EL CODIGO!!
+		int columna;
+		
+		//Medimos el tiempo de ejecución
+		long tiempoInicio = System.currentTimeMillis();
+		
+		
 		Nodo ini=new Nodo(tablero);
-		Nodo ini2=new Nodo(tablero);
-		//return Completo(ini);
-		//return Heuristica(ini,5);
-		int heuristica=Heuristica(ini2,5);
-		int poda=Poda(ini,5);
-		if(heuristica==poda) System.out.println("FUNCIONA");
-		else System.out.println("NO FUNCIONA");
-		return poda;
+		//columna=Completo(ini);
+		//columna=Heuristica(ini,5);
+		columna=Poda(ini,5);
+
+		
+		//Medimos el tiempo de ejecución
+		long totalTiempo = System.currentTimeMillis() - tiempoInicio;
+		System.out.println("El tiempo de resolución es :" + totalTiempo + " miliseg");
+		
+		
+		return columna;
 	}
 
 
@@ -129,7 +138,7 @@ public class Alg_Minimax {
 	}
 
 	public static void Heuristica_CreaArbol(Nodo ini,int limite) {
-		if(limite>0){
+		if(limite!=0){
 			ArrayList<Nodo> sucesores= ini.getSucesores();
 			Iterator<Nodo> it=sucesores.iterator();
 			while(it.hasNext()){
