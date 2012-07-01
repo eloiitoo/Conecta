@@ -113,7 +113,7 @@ public class Alg_Minimax {
 		}
 		
 		//Si algo falla --> Aleatorio
-		System.out.println("ALEATORIO      ALEATORIO     ALEATORIO");
+		System.out.println("HEURISTICA  ALEATORIO    ALEATORIO     ALEATORIO");
 		Random rand = new Random();
 		int accion=1;
 		do {
@@ -171,7 +171,7 @@ public class Alg_Minimax {
 		}
 		
 		//Si algo falla --> Aleatorio
-		System.out.println("ALEATORIO      ALEATORIO     ALEATORIO");
+		System.out.println("PODA  ALEATORIO      ALEATORIO     ALEATORIO");
 		Random rand = new Random();
 		int accion=1;
 		do {
@@ -185,10 +185,8 @@ public class Alg_Minimax {
 	
 	
 	private static void Poda_CreaArbol(Nodo ini, int limite) {
-		if(limite>0){
 			ArrayList<Nodo> sucesores= ini.getSucesores();
-			if(ini.esHoja()){
-				//Poda_CalcularUtilidad(ini);
+			if(ini.esHoja()||limite==0){
 				ini.calcula_utilidad();
 			}
 			else{
@@ -207,8 +205,6 @@ public class Alg_Minimax {
 				}
 				//if(ini.alfa<ini.beta) System.out.println("HE PODADO");
 			}
-			
-		}
 	}
 
 //	private static void Poda_CalcularUtilidad(Nodo ini) {
