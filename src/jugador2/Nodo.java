@@ -16,6 +16,8 @@ public class Nodo {
 	public int Jugador; //0->MAX 	1->MIN
 		public static int MAX=0;
 		public static int MIN=1;
+	public int alfa=Integer.MIN_VALUE;
+	public int beta=Integer.MAX_VALUE;
 	
 	public Nodo(tableroSimple tablero){
 		this.tablero=clonar(tablero);
@@ -48,6 +50,8 @@ public class Nodo {
 		for(int i=1;i<=tablero.getNumColumnas();i++){
 			if(tablero.getLlenado(i)!=0){
 				n=new Nodo(tablero);
+				n.alfa=this.alfa;
+				n.beta=this.beta;
 				n.padre=this;
 				n.Accioncolumna=i;
 				
@@ -115,8 +119,7 @@ public class Nodo {
 		int azul,rojo;
 		azul=voiGanando(tipoFichas.FICHA_AZUL);
 		rojo=voiGanando(tipoFichas.FICHA_ROJA);
-		
-		this.utilidad=azul-rojo;
+		this.alfa=this.beta=this.utilidad=azul-rojo;
 	}
 	   public int voiGanando(tipoFichas ficha) {
 		   int util=0;   
@@ -176,4 +179,8 @@ public class Nodo {
 		    //  this.setPartidaTerminada(false);
 		      return util*util;
 		   }
+	   public void setAlfaBeta(int a,int b){
+		   this.alfa=a;
+		   this.beta=b;
+	   }
 }

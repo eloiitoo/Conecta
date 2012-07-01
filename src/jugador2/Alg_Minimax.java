@@ -16,10 +16,14 @@ public class Alg_Minimax {
 		// COLOCAR AQUI EL CODIGO!!
 		Nodo ini=new Nodo(tablero);
 		//return Completo(ini);
-		return Heuristica(ini,5);
+		//return Heuristica(ini,5);
+		if(Heuristica(ini,5)==Poda(ini,5)) System.out.println("FUNCIONA");
+		else System.out.println("NO FUNCIONA");
+		return Poda(ini,5);
 	}
 
-//////////////Generacion infinita del arbol. (con Mini-Servidor)//////////////Generacion infinita del arbol. (con Mini-Servidor)////////////
+
+	//////////////Generacion infinita del arbol. (con Mini-Servidor)//////////////Generacion infinita del arbol. (con Mini-Servidor)////////////
 	public static int Completo(Nodo ini){
 		Completo_CreaArbol(ini);
 		Completo_CalcularUtilidad(ini);
@@ -121,7 +125,7 @@ public class Alg_Minimax {
 		return accion;
 	}
 
-	private static void Heuristica_CreaArbol(Nodo ini,int limite) {
+	public static void Heuristica_CreaArbol(Nodo ini,int limite) {
 		if(limite>0){
 			ArrayList<Nodo> sucesores= ini.getSucesores();
 			Iterator<Nodo> it=sucesores.iterator();
@@ -131,7 +135,7 @@ public class Alg_Minimax {
 		}
 	}
 
-	private static void Heutistica_CalcularUtilidad(Nodo ini) {
+	public static void Heutistica_CalcularUtilidad(Nodo ini) {
 		// Explande la utilidad de los nodos hojas hasta la raiz
 
 		Iterator<Nodo> iterador=ini.hijos.iterator();
@@ -152,5 +156,79 @@ public class Alg_Minimax {
 		}
 	}
 	
+	///////PODA/////////PODA/////////PODA/////////PODA/////////PODA/////////PODA/////////PODA////
+	public static int Poda(Nodo ini, int limite){
+		Poda_CreaArbol(ini,limite);
+		//Poda_CalcularUtilidad(ini);
+		Iterator<Nodo> iterador=ini.hijos.iterator();
+		//System.out.println("Utilidad de la raiz:"+ini.utilidad);
+		while(iterador.hasNext()){
+			Nodo actual=iterador.next();
+
+			if(actual.utilidad==ini.utilidad){
+				return actual.Accioncolumna;
+			}
+		}
+		
+		//Si algo falla --> Aleatorio
+		System.out.println("ALEATORIO      ALEATORIO     ALEATORIO");
+		Random rand = new Random();
+		int accion=1;
+		do {
+            accion = 1 + rand.nextInt(ini.tablero.getNumColumnas());
+            
+         } while (ini.tablero.getLlenado(accion) == 0);
+		
+		
+		return accion;
+	}
+	
+	
+	private static void Poda_CreaArbol(Nodo ini, int limite) {
+		if(limite>0){
+			ArrayList<Nodo> sucesores= ini.getSucesores();
+			if(ini.esHoja()){
+				//Poda_CalcularUtilidad(ini);
+				ini.calcula_utilidad();
+			}
+			else{
+				Iterator<Nodo> it=sucesores.iterator();
+				while(it.hasNext()&&ini.alfa<ini.beta){
+					Nodo actual=it.next();
+					Poda_CreaArbol(actual,limite-1);
+					if(ini.Jugador==Nodo.MAX && actual.utilidad>ini.alfa){
+						ini.alfa=actual.utilidad;
+						ini.utilidad=actual.utilidad;
+					}
+					if(ini.Jugador==Nodo.MIN && actual.utilidad<ini.beta){
+						ini.beta=actual.utilidad;
+						ini.utilidad=actual.utilidad;
+					}
+				}
+				//if(ini.alfa<ini.beta) System.out.println("HE PODADO");
+			}
+			
+		}
+	}
+
+//	private static void Poda_CalcularUtilidad(Nodo ini) {
+//		Iterator<Nodo> iterador=ini.hijos.iterator();
+//		while(iterador.hasNext()){				
+//			Heutistica_CalcularUtilidad(iterador.next());
+//		}
+//		
+//		if(ini.esHoja()){
+//			ini.calcula_utilidad();
+//		}
+//		else{
+//			if(ini.Jugador==Nodo.MAX){
+//				ini.EligeMax();
+//			}
+//			else{
+//				ini.EligeMin();
+//			}
+//		}
+//	}
+
 	
 }
