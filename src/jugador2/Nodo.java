@@ -119,8 +119,6 @@ public class Nodo {
 		int azul,rojo;
 		azul=voiGanando(tipoFichas.FICHA_AZUL);
 		rojo=voiGanando(tipoFichas.FICHA_ROJA);
-//		this.alfa=azul-rojo;
-//		this.beta=azul-rojo;
 		this.utilidad=azul-rojo;
 	}
 	   public int voiGanando(tipoFichas ficha) {

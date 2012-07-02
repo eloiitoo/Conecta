@@ -16,7 +16,7 @@ public class Alg_Minimax {
 		// COLOCAR AQUI EL CODIGO!!
 		int columna;
 		
-		//Medimos el tiempo de ejecución
+		//Medimos el tiempo de ejecuciï¿½n
 		long tiempoInicio = System.currentTimeMillis();
 		
 		
@@ -26,9 +26,9 @@ public class Alg_Minimax {
 		//columna=Poda(ini,5);
 
 		
-		//Medimos el tiempo de ejecución
+		//Medimos el tiempo de ejecuciï¿½n
 		long totalTiempo = System.currentTimeMillis() - tiempoInicio;
-		System.out.println("El tiempo de resolución es :" + totalTiempo + " miliseg");
+		System.out.println("El tiempo de resoluciï¿½n es :" + totalTiempo + " miliseg");
 		
 		
 		return columna;
@@ -47,6 +47,7 @@ public class Alg_Minimax {
 
 			if(actual.utilidad==1){
 				return actual.Accioncolumna;
+				
 			}
 		}
 		iterador=ini.hijos.iterator();
