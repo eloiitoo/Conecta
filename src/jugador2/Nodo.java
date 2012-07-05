@@ -38,7 +38,6 @@ public class Nodo {
 	}
 
 	public ArrayList<Nodo> getSucesores() {//NOSOTROS SOMOS LOS AZULES 
-		//HACER LOS SUCESORES
 		ArrayList<Nodo> sucesores=new ArrayList<Nodo>();
 		if( tablero.isGanador(tipoFichas.FICHA_AZUL) || tablero.isGanador(tipoFichas.FICHA_ROJA)){
 			this.hijos=sucesores;
@@ -70,18 +69,17 @@ public class Nodo {
 		this.hijos=sucesores;//si no tiene hijos--> hoja y hijos=ArrayList vacio(isEmpty)
 
 		
-		
 		return sucesores;
 	}
+	
 	public boolean esHoja() {
 		if(this.hijos.isEmpty()) return true;
 		else return false;
 	}
+	
 	public boolean tablerolleno() {
 		for(int i=1;i<=tablero.getNumColumnas();i++){
-			if(tablero.getLlenado(i)!=0){
-				return false;
-			}
+			if(tablero.getLlenado(i)!=0)return false;
 		}
 		return true;
 	}
@@ -99,7 +97,6 @@ public class Nodo {
 		}
 		this.utilidad=max;
 		//System.out.println("Utilidad MAX:"+this.utilidad);
-
 	}
 	
 	public void EligeMin() {
@@ -115,72 +112,71 @@ public class Nodo {
 		this.utilidad=min;
 		//System.out.println("Utilidad MIN:"+this.utilidad);
 	}
+	
 	public void calcula_utilidad() {
 		int azul,rojo;
 		azul=voiGanando(tipoFichas.FICHA_AZUL);
 		rojo=voiGanando(tipoFichas.FICHA_ROJA);
 		this.utilidad=azul-rojo;
 	}
-	   public int voiGanando(tipoFichas ficha) {
-		   int util=0;   
-		   
-		      for (int i = 0; i < this.tablero.getTablero().length; i++) {
-		         for (int j = 0; j < this.tablero.getTablero()[0].length; j++) {
+	
+	public int voiGanando(tipoFichas ficha) {
+		int util=0;   
+		for (int i = 0; i < this.tablero.getTablero().length; i++) {
+			for (int j = 0; j < this.tablero.getTablero()[0].length; j++) {
+				int horizontal = 0;
+		        int vertical = 0;
+		        int diagonalDerecha = 0;
+		        int diagonalIzquierda = 0;
+		        int LONG_SOLUCION=4;
+		        for (int k = 0; k < LONG_SOLUCION; k++) {
+		        	if (i + k < this.tablero.getTablero().length) {
+		        		if (this.tablero.getTablero()[i + k][j] == ficha) {
+		        			horizontal++;
+		                }
+		        	}
 
-		            int horizontal = 0;
-		            int vertical = 0;
-		            int diagonalDerecha = 0;
-		            int diagonalIzquierda = 0;
-		            int LONG_SOLUCION=4;//<-----------deberia ser un 4
-		            for (int k = 0; k < LONG_SOLUCION; k++) {
+		        	if (j + k < this.tablero.getTablero()[0].length) {
+		        		if (this.tablero.getTablero()[i][j + k] == ficha) {
+		        			vertical++;
+		        		}
+		        	}
 
-		               if (i + k < this.tablero.getTablero().length) {
-		                  if (this.tablero.getTablero()[i + k][j] == ficha) {
-		                     horizontal++;
-		                  }
-		               }
+		        	if (i + k < this.tablero.getTablero().length && j + k < this.tablero.getTablero()[0].length) {
+		        		if (this.tablero.getTablero()[i + k][j + k] == ficha) {
+		        			diagonalDerecha++;
+		        		}
+		        	}
 
-		               if (j + k < this.tablero.getTablero()[0].length) {
-		                  if (this.tablero.getTablero()[i][j + k] == ficha) {
-		                     vertical++;
-		                  }
-		               }
+		        	if (i - k >= 0 && j + k < this.tablero.getTablero()[0].length) {
+		        		if (this.tablero.getTablero()[i - k][j + k] == ficha) {
+		        			diagonalIzquierda++;
+		        		}
+		        	}
 
-		               if (i + k < this.tablero.getTablero().length && j + k < this.tablero.getTablero()[0].length) {
-		                  if (this.tablero.getTablero()[i + k][j + k] == ficha) {
-		                     diagonalDerecha++;
-		                  }
+		        	if (horizontal == LONG_SOLUCION || 
+		        			vertical == LONG_SOLUCION || 
+		        			diagonalDerecha == LONG_SOLUCION || 
+		        			diagonalIzquierda == LONG_SOLUCION) {
+		        			//this.setPartidaTerminada(true);
+		                  	return Integer.MAX_VALUE;//SI HE GANADO SIGO ESTE CAMINO SEGURO
 		               }
-
-		               if (i - k >= 0 && j + k < this.tablero.getTablero()[0].length) {
-		                  if (this.tablero.getTablero()[i - k][j + k] == ficha) {
-		                     diagonalIzquierda++;
-		                  }
+		        	
+		        	if (horizontal == LONG_SOLUCION-1 || 
+		        			vertical == LONG_SOLUCION-1 || 
+		        			diagonalDerecha == LONG_SOLUCION-1 || 
+		        			diagonalIzquierda == LONG_SOLUCION-1) {
+		            	   	util+=2;
 		               }
-
-		               if (horizontal == LONG_SOLUCION || 
-		            		   vertical == LONG_SOLUCION || 
-		            		   diagonalDerecha == LONG_SOLUCION || 
-		            		   diagonalIzquierda == LONG_SOLUCION) {
-		                //  this.setPartidaTerminada(true);
-		                  return Integer.MAX_VALUE;//SI HE GANADO SIGO ESTE CAMINO SEGURO
+		        	if (horizontal == LONG_SOLUCION-2 || 
+		        			vertical == LONG_SOLUCION-2 || 
+		        			diagonalDerecha == LONG_SOLUCION-2 || 
+		        			diagonalIzquierda == LONG_SOLUCION-2) {
+		            	   	util+=1;
 		               }
-		               if (horizontal == LONG_SOLUCION-1 || 
-		            		   vertical == LONG_SOLUCION-1 || 
-		            		   diagonalDerecha == LONG_SOLUCION-1 || 
-		            		   diagonalIzquierda == LONG_SOLUCION-1) {
-		            	   util++;
-		            	   
-		               }
-		               
-		            }
-		         }
-		      }
-		    //  this.setPartidaTerminada(false);
-		      return util*util;
-		   }
-	   public void setAlfaBeta(int a,int b){
-		   this.alfa=a;
-		   this.beta=b;
-	   }
+		        	}
+			}
+		}
+		return util*util;//Exponencial
+	}
 }

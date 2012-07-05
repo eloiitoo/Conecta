@@ -11,31 +11,32 @@ import tablero.tipoFichas;
 public class Alg_Minimax {
 
 	static int Cols = 0;
+	static final int nivel = 6;
 	
 	public static int ElegirColumna(tableroSimple tablero) {
 		// COLOCAR AQUI EL CODIGO!!
 		int columna;
 		
-		//Medimos el tiempo de ejecuci�n
+		//Medimos el tiempo de ejecucion
 		long tiempoInicio = System.currentTimeMillis();
 		
 		
 		Nodo ini=new Nodo(tablero);
 		//columna=Completo(ini);
-		columna=Heuristica(ini,5);
-		//columna=Poda(ini,5);
+		//columna=Heuristica(ini,nivel);
+		columna=Poda(ini,nivel);
 
 		
-		//Medimos el tiempo de ejecuci�n
+		//Medimos el tiempo de ejecucion
 		long totalTiempo = System.currentTimeMillis() - tiempoInicio;
-		System.out.println("El tiempo de resoluci�n es :" + totalTiempo + " miliseg");
+		System.out.println("El tiempo de resolucion es :" + totalTiempo + " miliseg");
 		
 		
 		return columna;
 	}
 
 
-	//////////////Generacion infinita del arbol. (con Mini-Servidor)//////////////Generacion infinita del arbol. (con Mini-Servidor)////////////
+	////////////Generacion infinita del arbol. (con Mini-Servidor)////////////Generacion infinita del arbol. (con Mini-Servidor)//////////
 	public static int Completo(Nodo ini){
 		Completo_CreaArbol(ini);
 		Completo_CalcularUtilidad(ini);
@@ -44,24 +45,19 @@ public class Alg_Minimax {
 		//System.out.println("Utilidad de la raiz:"+ini.utilidad);
 		while(iterador.hasNext()){//INTENTO GANAR 
 			Nodo actual=iterador.next();
-
 			if(actual.utilidad==1){
 				return actual.Accioncolumna;
-			
-			
 			}
 		}
+		
 		iterador=ini.hijos.iterator();
 		while(iterador.hasNext()){//SI NO UEDO GANAR INTENTO EMPATAR
 			Nodo actual=iterador.next();
-
 			if(actual.utilidad==0){
 				return actual.Accioncolumna;
 			}
 		}
 		
-		
-
 		//Si no puedo ganar ni empartar --> Aleatorio
 		//System.out.println("ALEATORIO      ALEATORIO     ALEATORIO");
 		Random rand = new Random();
@@ -70,8 +66,6 @@ public class Alg_Minimax {
             accion = 1 + rand.nextInt(ini.tablero.getNumColumnas());
             
          } while (ini.tablero.getLlenado(accion) == 0);
-		
-		
 		return accion;
 	}
 
@@ -83,9 +77,7 @@ public class Alg_Minimax {
 		}
 	}
 	
-	public static void Completo_CalcularUtilidad(Nodo ini) {
-		// Explande la utilidad de los nodos hojas hasta la raiz
-
+	public static void Completo_CalcularUtilidad(Nodo ini){
 		Iterator<Nodo> iterador=ini.hijos.iterator();
 		while(iterador.hasNext()){				
 			Completo_CalcularUtilidad(iterador.next());
@@ -107,9 +99,7 @@ public class Alg_Minimax {
 			else{
 				ini.EligeMin();
 			}
-			
 		}
-		
 	}
 
 /////////////////Generacion limitada con heuristica./////////////////Generacion limitada con heuristica./////////////////
@@ -117,25 +107,23 @@ public class Alg_Minimax {
 		Heuristica_CreaArbol(ini,limite);
 		Heutistica_CalcularUtilidad(ini);
 		Iterator<Nodo> iterador=ini.hijos.iterator();
+		
 		//System.out.println("Utilidad de la raiz:"+ini.utilidad);
 		while(iterador.hasNext()){//INTENTO GANAR 
 			Nodo actual=iterador.next();
-
 			if(actual.utilidad==ini.utilidad){
 				return actual.Accioncolumna;
 			}
 		}
 		
 		//Si algo falla --> Aleatorio
-		System.out.println("HEURISTICA  ALEATORIO    ALEATORIO     ALEATORIO");
+		//System.out.println("HEURISTICA  ALEATORIO    ALEATORIO     ALEATORIO");
 		Random rand = new Random();
 		int accion=1;
 		do {
             accion = 1 + rand.nextInt(ini.tablero.getNumColumnas());
             
          } while (ini.tablero.getLlenado(accion) == 0);
-		
-		
 		return accion;
 	}
 
@@ -150,8 +138,6 @@ public class Alg_Minimax {
 	}
 
 	public static void Heutistica_CalcularUtilidad(Nodo ini) {
-		// Expande la utilidad de los nodos hojas hasta la raiz
-
 		Iterator<Nodo> iterador=ini.hijos.iterator();
 		while(iterador.hasNext()){				
 			Heutistica_CalcularUtilidad(iterador.next());
@@ -174,25 +160,23 @@ public class Alg_Minimax {
 	public static int Poda(Nodo ini, int limite){
 		Poda_CreaArbol(ini,limite);
 		Iterator<Nodo> iterador=ini.hijos.iterator();
+		
 		//System.out.println("Utilidad de la raiz:"+ini.utilidad);
 		while(iterador.hasNext()){
 			Nodo actual=iterador.next();
-
 			if(actual.utilidad==ini.utilidad){
 				return actual.Accioncolumna;
 			}
 		}
 		
 		//Si algo falla --> Aleatorio
-		System.out.println("PODA  ALEATORIO      ALEATORIO     ALEATORIO");
+		//System.out.println("PODA  ALEATORIO      ALEATORIO     ALEATORIO");
 		Random rand = new Random();
 		int accion=1;
 		do {
             accion = 1 + rand.nextInt(ini.tablero.getNumColumnas());
             
          } while (ini.tablero.getLlenado(accion) == 0);
-		
-		
 		return accion;
 	}
 	
