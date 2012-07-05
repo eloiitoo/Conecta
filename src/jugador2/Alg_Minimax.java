@@ -47,7 +47,8 @@ public class Alg_Minimax {
 
 			if(actual.utilidad==1){
 				return actual.Accioncolumna;
-				
+			
+			
 			}
 		}
 		iterador=ini.hijos.iterator();
@@ -149,7 +150,7 @@ public class Alg_Minimax {
 	}
 
 	public static void Heutistica_CalcularUtilidad(Nodo ini) {
-		// Explande la utilidad de los nodos hojas hasta la raiz
+		// Expande la utilidad de los nodos hojas hasta la raiz
 
 		Iterator<Nodo> iterador=ini.hijos.iterator();
 		while(iterador.hasNext()){				
