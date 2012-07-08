@@ -8,7 +8,7 @@ import tablero.tableroSimple;
 
 public class Alg_Aleatorio {
 
-	public static boolean manual=false;//true;
+	public static boolean manual=true;//true;
 
 	
 	public static int ElegirColumna(tableroSimple tablero) {

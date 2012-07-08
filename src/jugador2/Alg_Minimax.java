@@ -11,7 +11,7 @@ import tablero.tipoFichas;
 public class Alg_Minimax {
 
 	static int Cols = 0;
-	static final int nivel = 6;
+	static final int nivel = 3;
 	
 	public static int ElegirColumna(tableroSimple tablero) {
 		// COLOCAR AQUI EL CODIGO!!
@@ -194,6 +194,8 @@ public class Alg_Minimax {
 				Iterator<Nodo> it=sucesores.iterator();
 				while(it.hasNext()&&ini.alfa<ini.beta){
 					Nodo actual=it.next();
+					actual.alfa=ini.alfa;
+					actual.beta=ini.beta;
 					Poda_CreaArbol(actual,limite-1);
 					if(ini.Jugador==Nodo.MAX && actual.utilidad>ini.alfa){
 						ini.alfa=actual.utilidad;
@@ -204,7 +206,7 @@ public class Alg_Minimax {
 						ini.utilidad=actual.utilidad;
 					}
 				}
-				//if(ini.alfa<ini.beta) System.out.println("HE PODADO");
+				//if(ini.alfa>=ini.beta) System.out.println("HE PODADO");
 			}
 		}
 			
